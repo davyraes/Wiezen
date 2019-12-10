@@ -1,4 +1,4 @@
-package com.example.wiezen;
+package com.logic.wiezen;
 
 public class Player {
     private String name;

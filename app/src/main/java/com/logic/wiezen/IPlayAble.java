@@ -1,4 +1,4 @@
-package com.example.wiezen;
+package com.logic.wiezen;
 
 import java.util.Dictionary;
 import java.util.HashSet;
@@ -8,5 +8,5 @@ public interface IPlayAble {
             Dictionary<Player, Integer> beginScores,
             HashSet<Player> players,
             HashSet<Player> contestors,
-            boolean win);
+            int wins);
 }

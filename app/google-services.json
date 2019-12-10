@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "878235723917",
+    "firebase_url": "https://wiezenapp.firebaseio.com",
+    "project_id": "wiezenapp",
+    "storage_bucket": "wiezenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878235723917:android:cdb2c13d45a10ab5d41ac4",
+        "android_client_info": {
+          "package_name": "com.example.wiezen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878235723917-0ef7eq8loh7m19drsmjv09ttc8ijmne1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wiezen",
+            "certificate_hash": "e026a9078cba58f7014c98a20769e80ace40c099"
+          }
+        },
+        {
+          "client_id": "878235723917-br67dgjlqf0e9pnrlon6lgqaa8g6nlvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdT13LjcY9FSVv8whqy1F5s_yciue4RbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878235723917-br67dgjlqf0e9pnrlon6lgqaa8g6nlvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

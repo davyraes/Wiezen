@@ -1,4 +1,4 @@
-package com.example.wiezen;
+package com.logic.wiezen;
 
 import java.util.Dictionary;
 import java.util.HashSet;
@@ -9,14 +9,14 @@ public class Round extends Thread {
     private HashSet<Player> contestors;
     private Player dealer;
     private IPlayAble play;
-    private boolean win;
+    private int nrOfWins;
 
-    public Round(Dictionary<Player, Integer> playerScores, HashSet<Player> players, HashSet<Player> contestors, Player dealer, IPlayAble play, boolean win) {
+    public Round(Dictionary<Player, Integer> playerScores, HashSet<Player> players, HashSet<Player> contestors, Player dealer, IPlayAble play, int wins) {
         this.dealer = dealer;
         this.play = play;
-        this.win = win;
+        this.nrOfWins = wins;
         this.players = players;
         this.contestors = contestors;
-        this.playerScores = play.Process(playerScores, players, contestors, win);
+        this.playerScores = play.Process(playerScores, players, contestors, wins);
     }
 }

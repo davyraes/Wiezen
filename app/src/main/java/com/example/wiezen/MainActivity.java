@@ -1,17 +1,14 @@
 package com.example.wiezen;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import com.logic.wiezen.Game;
+import com.logic.wiezen.GameConfiguration;
+import com.logic.wiezen.Player;
+import com.logic.wiezen.Round;
+
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 

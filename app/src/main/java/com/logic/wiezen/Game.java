@@ -1,4 +1,4 @@
-package com.example.wiezen;
+package com.logic.wiezen;
 
 import java.util.LinkedList;
 import java.util.List;
