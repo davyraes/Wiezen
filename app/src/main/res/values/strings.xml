@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Wiezen</string>
+    <string name="ToLoginBtnText">Already have a Login? Login</string>
+    <string name="LoginBtnText">Login</string>
+    <string name="SignUpBtnText">SignUp</string>
+    <string name="ToSignUpBtnText">No Login? Sign Up</string>
+    <string name="EmailHint">E-mail</string>
+    <string name="PassWordHint">Password</string>
 </resources>
