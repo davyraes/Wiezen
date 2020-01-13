@@ -1,0 +1,17 @@
+package com.example.wiezen;
+
+import android.os.Bundle;
+
+public class GameActivity extends AuthUserAppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+    }
+
+    @Override
+    protected Boolean NeedsAuth() {
+        return true;
+    }
+}

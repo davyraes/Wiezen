@@ -6,4 +6,7 @@
     <string name="ToSignUpBtnText">No Login? Sign Up</string>
     <string name="EmailHint">E-mail</string>
     <string name="PassWordHint">Password</string>
+    <string name="NewGameBtnText">New Game</string>
+    <string name="ContinueGameBtnText">Continue Game</string>
+    <string name="LogOutBtnText">Log out</string>
 </resources>

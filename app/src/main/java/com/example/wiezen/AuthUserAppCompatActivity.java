@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.logic.wiezen.Game;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,13 +16,19 @@ public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
     protected FirebaseAuth mFirebaseAuth;
     protected FirebaseAuth.AuthStateListener mAuthStateListener;
     protected FirebaseUser user;
+    protected FirebaseFirestore db;
+    protected Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        user = mFirebaseAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+        if(NeedsAuth()){
+            user = mFirebaseAuth.getCurrentUser();
+        }
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -34,4 +42,6 @@ public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
             }
         };
     }
+
+    protected abstract Boolean NeedsAuth();
 }

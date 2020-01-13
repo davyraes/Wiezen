@@ -62,4 +62,9 @@ public class LoginActivity extends AuthUserAppCompatActivity {
         Intent toMain = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(toMain);
     }
+
+    @Override
+    protected Boolean NeedsAuth() {
+        return false;
+    }
 }

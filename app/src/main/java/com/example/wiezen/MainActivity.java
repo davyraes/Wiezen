@@ -60,4 +60,9 @@ public class MainActivity extends AuthUserAppCompatActivity {
                     });
         }
     }
+
+    @Override
+    protected Boolean NeedsAuth() {
+        return false;
+    }
 }
