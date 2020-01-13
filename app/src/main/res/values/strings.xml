@@ -9,4 +9,9 @@
     <string name="NewGameBtnText">New Game</string>
     <string name="ContinueGameBtnText">Continue Game</string>
     <string name="LogOutBtnText">Log out</string>
+    <string name="Player1Text">Player 1</string>
+    <string name="Player2Text">Player 2</string>
+    <string name="Player3Text">Player 3</string>
+    <string name="Player4Text">Player 4</string>
+    <string name="Submit">Submit</string>
 </resources>

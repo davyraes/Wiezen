@@ -5,16 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.logic.wiezen.Game;
-import com.logic.wiezen.GameConfiguration;
-import com.logic.wiezen.Player;
-import com.logic.wiezen.Round;
-
-import java.util.LinkedList;
-
 public class HomeActivity extends AuthUserAppCompatActivity {
     private Button continueButton;
 
@@ -32,7 +22,8 @@ public class HomeActivity extends AuthUserAppCompatActivity {
     }
 
     public void OnContinueGameButtonClick(View v){
-
+        Intent toGame = new Intent(HomeActivity.this, GameActivity.class);
+        startActivity(toGame);
     }
 
     public void OnLogOutButtonClick(View v){
@@ -40,42 +31,6 @@ public class HomeActivity extends AuthUserAppCompatActivity {
         Intent toLogin = new Intent(HomeActivity.this, LoginActivity.class);
         mFirebaseAuth.signOut();
         startActivity(toLogin);
-    }
-
-    private Game CreateGame(String... playerNames){
-        int playerCount = playerNames.length;
-        if (playerCount < 4 || playerCount > 5){
-            /// throw an error here
-        }
-
-        /// Make Players for each playername
-        LinkedList<Player> players = new LinkedList<>();
-        for (String name : playerNames) {
-            players.add(new Player(name));
-        }
-
-        /// Import the config from database
-        GameConfiguration config = new GameConfiguration();
-
-        /// Create a new starting round
-        LinkedList<Round> startingRound = new LinkedList<>();
-
-        return new Game(
-                players,
-                playerCount,
-                config,
-                startingRound);
-    }
-
-    private void GetGameFromDB()
-    {
-        DocumentReference docRef = db.collection("Games").document(user.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Game game = documentSnapshot.toObject(Game.class);
-            }
-        });
     }
 
     @Override
