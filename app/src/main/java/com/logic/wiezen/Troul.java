@@ -4,6 +4,7 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class Troul extends PlayAble {
+    private boolean isWon;
     public Troul(GameConfiguration configuration) {
         super(configuration);
     }
@@ -15,7 +16,13 @@ public class Troul extends PlayAble {
         }
         Dictionary<Player, Integer> result = beginScores;
         int pPP = getConfiguration().getPointsForTroul() + (Math.abs(winningHands - getConfiguration().getPointsForOverStack())*2);
-        TwoVsTwo(result, players, contestors, winningHands >= getConfiguration().getHandsTroul(), pPP, winningHands == 13 );
+        isWon = winningHands >= getConfiguration().getHandsTroul();
+        TwoVsTwo(result, players, contestors, isWon, pPP, winningHands == 13 );
         return result;
+    }
+
+    @Override
+    public boolean IsWon() {
+        return isWon;
     }
 }

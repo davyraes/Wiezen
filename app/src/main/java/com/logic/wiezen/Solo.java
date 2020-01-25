@@ -9,6 +9,7 @@ public class Solo extends PlayAble {
         super(configuration);
         this.slim = slim;
     }
+    private boolean isWon;
 
     @Override
     public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) throws Exception {
@@ -21,13 +22,19 @@ public class Solo extends PlayAble {
             pPP = getConfiguration().getPointsForSolo();
         }
 
+        isWon = winningHands == 13;
         if (players.size() == 1){
-            OneVsThree(result, players, contestors, winningHands == 13, pPP, false);
+            OneVsThree(result, players, contestors, isWon, pPP, false);
         }
         else {
             throw new Exception("Unsupported amount of players");
         }
 
         return result;
+    }
+
+    @Override
+    public boolean IsWon() {
+        return isWon;
     }
 }

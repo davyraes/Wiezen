@@ -5,6 +5,7 @@ import java.util.List;
 
 public class dans extends PlayAble {
     private int amount;
+    private boolean isWon;
 
     public dans(GameConfiguration configuration, int amount) {
         super(configuration);
@@ -33,8 +34,14 @@ public class dans extends PlayAble {
                 pPP = 0;
                 break;
         }
+        isWon = winningHands >= this.amount;
 
-        OneVsThree(result, players, contestors, winningHands >= this.amount, pPP, false);
+        OneVsThree(result, players, contestors, isWon, pPP, false);
         return result;
+    }
+
+    @Override
+    public boolean IsWon() {
+        return isWon;
     }
 }

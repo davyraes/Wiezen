@@ -4,6 +4,7 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class Regular extends PlayAble {
+    private boolean isWon;
 
     public Regular(GameConfiguration configuration) {
         super(configuration);
@@ -19,13 +20,20 @@ public class Regular extends PlayAble {
 
         if (players.size() == 1){
             int ppp = (getConfiguration().getPointsForRegular() + Math.abs(winningHands - getConfiguration().getHandsRegular1P())) * 3;
-            OneVsThree(result, players, contestors, winningHands >= getConfiguration().getHandsRegular1P(), ppp, winningHands == 13);
+            isWon = winningHands >= getConfiguration().getHandsRegular1P();
+            OneVsThree(result, players, contestors, isWon, ppp, winningHands == 13);
         }
         else if (players.size() == 2){
             int ppp = getConfiguration().getPointsForRegular() + Math.abs(winningHands - getConfiguration().getHandsRegular2P());
-            TwoVsTwo(result, players, contestors, winningHands >= getConfiguration().getHandsRegular2P(), ppp, winningHands == 13);
+            isWon = winningHands >= getConfiguration().getHandsRegular2P();
+            TwoVsTwo(result, players, contestors, isWon, ppp, winningHands == 13);
         }
 
         return result;
+    }
+
+    @Override
+    public boolean IsWon() {
+        return isWon;
     }
 }

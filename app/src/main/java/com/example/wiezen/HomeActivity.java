@@ -18,11 +18,12 @@ public class HomeActivity extends AuthUserAppCompatActivity {
     }
 
     public void OnNewGameButtonClick(View v){
-
+        Intent toNew = new Intent(HomeActivity.this, PlayersActivity.class);
+        startActivity(toNew);
     }
 
     public void OnContinueGameButtonClick(View v){
-        Intent toGame = new Intent(HomeActivity.this, GameActivity.class);
+        Intent toGame = new Intent(HomeActivity.this, OverViewActivity.class);
         startActivity(toGame);
     }
 

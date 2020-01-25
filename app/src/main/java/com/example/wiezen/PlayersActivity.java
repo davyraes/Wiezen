@@ -1,5 +1,6 @@
 package com.example.wiezen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,19 +9,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.logic.wiezen.Game;
 import com.logic.wiezen.GameConfiguration;
 import com.logic.wiezen.Player;
 import com.logic.wiezen.Round;
+import com.logic.wiezen.Start;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 
 public class PlayersActivity extends AuthUserAppCompatActivity {
+    private static final String TAG = "PlayersActivity";
+
     private TextView player1;
     private TextView player2;
     private TextView player3;
@@ -38,8 +40,6 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
     }
 
     public void OnSubmitBtnClick(View v){
-        final List<String> players = new LinkedList<>();
-
         final String p1Name = player1.getText().toString();
         final String p2Name = player2.getText().toString();
         final String p3Name = player3.getText().toString();
@@ -49,29 +49,11 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
             Toast.makeText(PlayersActivity.this, "PlayerName incorrect", Toast.LENGTH_SHORT).show();
         }
 
-        DocumentReference docRef = db.collection("Config").document(user.getUid());
-        docRef.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        GameConfiguration config = documentSnapshot.toObject(GameConfiguration.class);
-                        db
-                                .collection("Games")
-                                .add(
-                                        CreateGame(
-                                                config,
-                                                p1Name,
-                                                p2Name,
-                                                p3Name,
-                                                p4Name));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(user.getUid(),"New game needs gameconfig", e);
-                    }
-                });
+        Game newGame = CreateGame(new GameConfiguration(), p1Name, p2Name, p3Name, p4Name);
+
+         gamesCollection.document(user.getUid()).set(newGame);
+        Intent intent =  new Intent(PlayersActivity.this, OverViewActivity.class);
+        startActivity(intent);
     }
 
     private Game CreateGame(GameConfiguration config, String... playerNames){
@@ -82,18 +64,27 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
 
         /// Make Players for each playername
         LinkedList<Player> players = new LinkedList<>();
+        Hashtable<Player, Integer> start = new Hashtable<>();
         for (String name : playerNames) {
-            players.add(new Player(name));
+            Player player = new Player(name);
+            players.add(player);
+            start.put(player, 0);
         }
 
         /// Create a new starting round
         LinkedList<Round> startingRound = new LinkedList<>();
+        try {
+            startingRound.add(new Round(start, null , null, null, new Start(config), 0));
+        } catch (Exception e) {
+            Log.e(TAG, "CreateGame: startinground", e);
+        }
 
         return new Game(
                 players,
                 playerCount,
                 config,
-                startingRound);
+                startingRound,
+                user.getUid());
     }
 
     @Override

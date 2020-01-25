@@ -1,8 +1,9 @@
 package com.logic.wiezen;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 
-public class GameConfiguration {
+public class GameConfiguration implements Serializable {
     private boolean doubleAllWon;
     private int pointsForRegular;
     private int pointsForOverStack;
