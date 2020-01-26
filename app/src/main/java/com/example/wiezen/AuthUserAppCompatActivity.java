@@ -2,12 +2,14 @@ package com.example.wiezen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,22 +19,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
+    private static final String TAG = "AuthUserAppCompatActivi";
     protected FirebaseAuth mFirebaseAuth;
     protected FirebaseAuth.AuthStateListener mAuthStateListener;
     protected FirebaseUser user;
     protected FirebaseFirestore db;
-    protected CollectionReference gamesCollection;
+    protected DocumentReference gameReference;
     protected Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         if(NeedsAuth()){
-            db = FirebaseFirestore.getInstance();
             user = mFirebaseAuth.getCurrentUser();
-            gamesCollection = db.collection("Games");
+            gameReference = db.collection("Games").document(user.getUid());
         }
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -50,14 +53,25 @@ public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
 
     protected abstract Boolean NeedsAuth();
 
-    protected void GetGameFromDB()
-    {
-        DocumentReference docRef = gamesCollection.document(user.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Game game = documentSnapshot.toObject(Game.class);
-            }
-        });
+    protected void GetGameFromDB() {
+        gameReference
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        game = documentSnapshot.toObject(Game.class);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure: ", e);
+                        Toast.makeText(AuthUserAppCompatActivity.this, "Error while loading game", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    protected Task<Void> SaveGameToDb(Game game){
+        return gameReference.set(game);
     }
 }

@@ -1,25 +1,24 @@
 package com.logic.wiezen;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Game implements Serializable {
-    private List<Player> players;
-    private int amountOfPlayers;
-    private GameConfiguration configuration;
-    private LinkedList<Round> rounds;
-    private String user;
+    public ArrayList<Player> players;
+    public int amountOfPlayers;
+    public GameConfiguration configuration;
+    public ArrayList<Round> rounds;
+    public String user;
 
-    public LinkedList<Round> getRounds() {
+    public ArrayList<Round> getRounds() {
         return rounds;
     }
 
     public Game(
-            List<Player> players,
+            ArrayList<Player> players,
             int amountOfPlayers,
             GameConfiguration configuration,
-            LinkedList<Round> rounds,
+            ArrayList<Round> rounds,
             String user) {
         this.players = players;
         this.amountOfPlayers = amountOfPlayers;

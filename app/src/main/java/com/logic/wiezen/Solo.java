@@ -1,7 +1,9 @@
 package com.logic.wiezen;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 
 public class Solo extends PlayAble {
     private boolean slim;
@@ -12,14 +14,14 @@ public class Solo extends PlayAble {
     private boolean isWon;
 
     @Override
-    public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) throws Exception {
-        Dictionary<Player, Integer> result = beginScores;
+    public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
+        Map<String, Integer> result = beginScores;
         int pPP;
         if (this.slim){
-            pPP = getConfiguration().getPointsForSoloSlim();
+            pPP = configuration.pointsForSoloSlim;
         }
         else{
-            pPP = getConfiguration().getPointsForSolo();
+            pPP = configuration.pointsForSolo;
         }
 
         isWon = winningHands == 13;

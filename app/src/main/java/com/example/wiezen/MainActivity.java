@@ -53,7 +53,6 @@ public class MainActivity extends AuthUserAppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Signup unsuccesfull", Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent toHome = new Intent(MainActivity.this, HomeActivity.class);
-
                                 startActivity(toHome);
                             }
                         }

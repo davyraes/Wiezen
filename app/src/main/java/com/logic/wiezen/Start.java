@@ -1,7 +1,7 @@
 package com.logic.wiezen;
 
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Start extends PlayAble {
     public Start(GameConfiguration configuration) {
@@ -9,7 +9,7 @@ public class Start extends PlayAble {
     }
 
     @Override
-    public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) throws Exception {
+    public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
         return beginScores;
     }
 

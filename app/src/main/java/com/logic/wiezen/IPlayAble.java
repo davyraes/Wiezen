@@ -1,14 +1,14 @@
 package com.logic.wiezen;
 
 import java.io.Serializable;
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public interface IPlayAble extends Serializable {
-    Dictionary<Player, Integer> Process(
-            Dictionary<Player, Integer> beginScores,
-            List<Player> players,
-            List<Player> contestors,
+    Map<String, Integer> Process(
+            Map<String, Integer> beginScores,
+            ArrayList<Player> players,
+            ArrayList<Player> contestors,
             int winningHands) throws Exception;
 
     boolean IsWon();

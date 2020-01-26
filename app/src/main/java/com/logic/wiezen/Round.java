@@ -1,17 +1,17 @@
 package com.logic.wiezen;
 
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Round{
-    private Dictionary<Player, Integer> playerScores;
-    private List<Player> players;
-    private List<Player> contestors;
-    private Player dealer;
-    private IPlayAble play;
-    private int hands;
+    public Map<String, Integer> playerScores;
+    public ArrayList<Player> players;
+    public ArrayList<Player> contestors;
+    public Player dealer;
+    public IPlayAble play;
+    public int hands;
 
-    public Round(Dictionary<Player, Integer> playerScores, List<Player> players, List<Player> contestors, Player dealer, IPlayAble play, int hands) throws Exception {
+    public Round(Map<String, Integer> playerScores, ArrayList<Player> players, ArrayList<Player> contestors, Player dealer, IPlayAble play, int hands) throws Exception {
         this.dealer = dealer;
         this.play = play;
         this.hands = hands;
@@ -20,31 +20,7 @@ public class Round{
         this.playerScores = play.Process(playerScores, players, contestors, hands);
     }
 
-    public Dictionary<Player, Integer> getPlayerScores() {
-        return playerScores;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public Player getDealer() {
-        return dealer;
-    }
-
-    public IPlayAble getPlay() {
-        return play;
-    }
-
-    public int getHands() {
-        return hands;
-    }
-
-    public List<Player> getContestors() {
-        return contestors;
-    }
-
-    public Boolean IsWon() {
+    public boolean IsWon(){
         return play.IsWon();
     }
 }

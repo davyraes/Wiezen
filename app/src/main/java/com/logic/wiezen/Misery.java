@@ -1,7 +1,7 @@
 package com.logic.wiezen;
 
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Misery extends PlayAble {
     private boolean open;
@@ -12,15 +12,15 @@ public class Misery extends PlayAble {
     }
 
     @Override
-    public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) throws Exception {
-        Dictionary<Player, Integer> result = beginScores;
+    public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
+        Map<String, Integer> result = beginScores;
         int pPP;
         isWon = winningHands == 0;
         if (this.open){
-            pPP = getConfiguration().getPointsForOpenMisery();
+            pPP = configuration.pointsForOpenMisery;
         }
         else{
-            pPP = getConfiguration().getPointsForMisery();
+            pPP = configuration.pointsForMisery;
         }
 
         if (players.size() == 1){

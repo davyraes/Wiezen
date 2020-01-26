@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class OverViewActivity extends AuthUserAppCompatActivity {
     private static final String TAG = "OverViewActivity";
-    private List<Round> mrounds = game.getRounds();
     private ArrayList<String> images = new ArrayList<>();
 
     @Override
@@ -44,7 +43,7 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         Log.d(TAG, "initRecyclerView: init recyclerview");
         initImages();
         RecyclerView recyclerView = findViewById(R.id.mainRecycler);
-        MainRecyclerViewAdaptor adapter = new MainRecyclerViewAdaptor(mrounds, images, this );
+        MainRecyclerViewAdaptor adapter = new MainRecyclerViewAdaptor(game.getRounds(), images, this );
         recyclerView.setAdapter(adapter);
     }
 

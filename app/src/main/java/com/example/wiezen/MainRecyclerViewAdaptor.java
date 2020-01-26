@@ -15,7 +15,6 @@ import com.logic.wiezen.Player;
 import com.logic.wiezen.Round;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +23,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerViewAdaptor.ViewHolder>{
     private static final String TAG = "MainRecyclerViewAdaptor";
 
-    private List<Round> mRounds;
+    private ArrayList<Round> mRounds;
     private ArrayList<String> mImages;
     private Context mContext;
 
-    public MainRecyclerViewAdaptor(List<Round> mRounds, ArrayList<String> mImages, Context mContext) {
+    public MainRecyclerViewAdaptor(ArrayList<Round> mRounds, ArrayList<String> mImages, Context mContext) {
         this.mRounds = mRounds;
         this.mImages = mImages;
         this.mContext = mContext;
@@ -52,7 +51,7 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
                 .load(mImages.get(imageNr(round.IsWon())))
                 .into(holder.image);
 
-        List<Player> players = round.getPlayers();
+        ArrayList<Player> players = round.players;
 
         holder.scoreP1.setText(GetPlayerscoreAsString(round, players.get(0)));
         holder.scoreP2.setText(GetPlayerscoreAsString(round, players.get(1)));
@@ -91,7 +90,7 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
     }
 
     private String GetPlayerscoreAsString(Round round, Player player){
-        int score = round.getPlayerScores().get(player);
+        int score = round.playerScores.get(player.name);
         return Integer.toString(score);
     }
 

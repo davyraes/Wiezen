@@ -1,7 +1,7 @@
 package com.logic.wiezen;
 
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Regular extends PlayAble {
     private boolean isWon;
@@ -11,21 +11,21 @@ public class Regular extends PlayAble {
     }
 
     @Override
-    public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) {
+    public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) {
         if(players.isEmpty() || players.size() > 2) {
             // throw an error
         }
 
-        Dictionary<Player, Integer>result = beginScores;
+        Map<String, Integer>result = beginScores;
 
         if (players.size() == 1){
-            int ppp = (getConfiguration().getPointsForRegular() + Math.abs(winningHands - getConfiguration().getHandsRegular1P())) * 3;
-            isWon = winningHands >= getConfiguration().getHandsRegular1P();
+            int ppp = (configuration.pointsForRegular + Math.abs(winningHands - configuration.handsRegular1P)) * 3;
+            isWon = winningHands >= configuration.handsRegular1P;
             OneVsThree(result, players, contestors, isWon, ppp, winningHands == 13);
         }
         else if (players.size() == 2){
-            int ppp = getConfiguration().getPointsForRegular() + Math.abs(winningHands - getConfiguration().getHandsRegular2P());
-            isWon = winningHands >= getConfiguration().getHandsRegular2P();
+            int ppp = configuration.pointsForRegular + Math.abs(winningHands - configuration.handsRegular2P);
+            isWon = winningHands >= configuration.handsRegular2P;
             TwoVsTwo(result, players, contestors, isWon, ppp, winningHands == 13);
         }
 

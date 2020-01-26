@@ -7,16 +7,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.logic.wiezen.Game;
 import com.logic.wiezen.GameConfiguration;
 import com.logic.wiezen.Player;
 import com.logic.wiezen.Round;
 import com.logic.wiezen.Start;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.LinkedList;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 
@@ -51,9 +53,19 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
 
         Game newGame = CreateGame(new GameConfiguration(), p1Name, p2Name, p3Name, p4Name);
 
-         gamesCollection.document(user.getUid()).set(newGame);
-        Intent intent =  new Intent(PlayersActivity.this, OverViewActivity.class);
-        startActivity(intent);
+        SaveGameToDb(newGame)
+                 .addOnCompleteListener(new OnCompleteListener<Void>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Void> task) {
+                         if(!task.isSuccessful()){
+                             Toast.makeText(PlayersActivity.this, " saving failed", Toast.LENGTH_SHORT).show();
+                         }else{
+                             Intent intent = new Intent(PlayersActivity.this, OverViewActivity.class);
+                             startActivity(intent);
+                         }
+                     }
+                 });
+
     }
 
     private Game CreateGame(GameConfiguration config, String... playerNames){
@@ -63,16 +75,16 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
         }
 
         /// Make Players for each playername
-        LinkedList<Player> players = new LinkedList<>();
-        Hashtable<Player, Integer> start = new Hashtable<>();
+        ArrayList<Player> players = new ArrayList<>();
+        Map<String, Integer> start = new Hashtable<>();
         for (String name : playerNames) {
             Player player = new Player(name);
             players.add(player);
-            start.put(player, 0);
+            start.put(player.name, 0);
         }
 
         /// Create a new starting round
-        LinkedList<Round> startingRound = new LinkedList<>();
+        ArrayList<Round> startingRound = new ArrayList<>();
         try {
             startingRound.add(new Round(start, null , null, null, new Start(config), 0));
         } catch (Exception e) {

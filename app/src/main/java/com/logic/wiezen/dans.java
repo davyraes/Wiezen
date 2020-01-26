@@ -1,7 +1,7 @@
 package com.logic.wiezen;
 
-import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class dans extends PlayAble {
     private int amount;
@@ -13,21 +13,21 @@ public class dans extends PlayAble {
     }
 
     @Override
-    public Dictionary<Player, Integer> Process(Dictionary<Player, Integer> beginScores, List<Player> players, List<Player> contestors, int winningHands) {
-        Dictionary<Player, Integer> result = beginScores;
+    public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) {
+        Map<String, Integer> result = beginScores;
         int pPP;
         switch (amount){
             case 9:
-                pPP = getConfiguration().getPointsForDans9();
+                pPP = configuration.pointsForDans9;
                 break;
             case 10:
-                pPP = getConfiguration().getPointsForDans10();
+                pPP = configuration.pointsForDans10;
                 break;
             case 11:
-                pPP = getConfiguration().getPointsForDans11();
+                pPP = configuration.pointsForDans11;
                 break;
             case 12:
-                pPP = getConfiguration().getPointsForDans12();
+                pPP = configuration.pointsForDans12;
                 break;
             default:
                 // throw error
