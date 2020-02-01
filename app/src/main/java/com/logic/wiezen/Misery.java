@@ -11,6 +11,10 @@ public class Misery extends PlayAble {
         this.open = open;
     }
 
+    public Misery(GameConfiguration configuration) {
+        super(configuration);
+    }
+
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
         Map<String, Integer> result = beginScores;

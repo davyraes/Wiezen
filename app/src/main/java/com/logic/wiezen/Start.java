@@ -8,6 +8,8 @@ public class Start extends PlayAble {
         super(configuration);
     }
 
+    public Start(){
+    }
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
         return beginScores;

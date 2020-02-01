@@ -4,6 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import androidx.annotation.NonNull;
 
 public class HomeActivity extends AuthUserAppCompatActivity {
     private Button continueButton;
@@ -14,7 +21,14 @@ public class HomeActivity extends AuthUserAppCompatActivity {
         setContentView(R.layout.activity_home);
 
         continueButton = findViewById(R.id.continueGameButton);
-        continueButton.setEnabled(game != null);
+        GetGameFromDB().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(!task.isSuccessful()){
+                    continueButton.setEnabled(false);
+                }
+            }
+        });
     }
 
     public void OnNewGameButtonClick(View v){

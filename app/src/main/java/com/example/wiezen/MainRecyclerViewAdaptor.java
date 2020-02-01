@@ -48,10 +48,13 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(imageNr(round.IsWon())))
+                .load(mImages.get(0))
                 .into(holder.image);
 
         ArrayList<Player> players = round.players;
+        if (round.contestors != null){
+            players.addAll(round.contestors);
+        }
 
         holder.scoreP1.setText(GetPlayerscoreAsString(round, players.get(0)));
         holder.scoreP2.setText(GetPlayerscoreAsString(round, players.get(1)));

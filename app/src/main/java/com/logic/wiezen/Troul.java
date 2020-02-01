@@ -11,6 +11,9 @@ public class Troul extends PlayAble {
         super(configuration);
     }
 
+    public Troul(){
+    }
+
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {
         if(players.size() != 2){

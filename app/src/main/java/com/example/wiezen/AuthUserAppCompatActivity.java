@@ -53,22 +53,9 @@ public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
 
     protected abstract Boolean NeedsAuth();
 
-    protected void GetGameFromDB() {
-        gameReference
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        game = documentSnapshot.toObject(Game.class);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e);
-                        Toast.makeText(AuthUserAppCompatActivity.this, "Error while loading game", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    protected Task<DocumentSnapshot> GetGameFromDB() {
+        return gameReference
+                .get();
     }
 
     protected Task<Void> SaveGameToDb(Game game){

@@ -9,12 +9,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.logic.wiezen.Game;
 import com.logic.wiezen.GameConfiguration;
+import com.logic.wiezen.PlayAbleEnum;
 import com.logic.wiezen.Player;
 import com.logic.wiezen.Round;
-import com.logic.wiezen.Start;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -86,9 +85,9 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
         /// Create a new starting round
         ArrayList<Round> startingRound = new ArrayList<>();
         try {
-            startingRound.add(new Round(start, null , null, null, new Start(config), 0));
+            startingRound.add(new Round(start, players , null, null, PlayAbleEnum.START, 0, config));
         } catch (Exception e) {
-            Log.e(TAG, "CreateGame: startinground", e);
+            Log.e(TAG, "CreateGame: Can t creat game", e);
         }
 
         return new Game(

@@ -10,6 +10,10 @@ public class Regular extends PlayAble {
         super(configuration);
     }
 
+    public Regular() {
+
+    }
+
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) {
         if(players.isEmpty() || players.size() > 2) {

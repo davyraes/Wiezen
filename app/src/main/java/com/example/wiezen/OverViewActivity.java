@@ -1,15 +1,21 @@
 package com.example.wiezen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.logic.wiezen.Round;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.logic.wiezen.Game;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OverViewActivity extends AuthUserAppCompatActivity {
@@ -21,8 +27,30 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_over_view);
         Log.d(TAG, "onCreate: started overview.");
-        GetGameFromDB();
-        initRecyclerView();
+
+        final TextView p1 = findViewById(R.id.Player1Nameview);
+        final TextView p2 = findViewById(R.id.Player2Nameview);
+        final TextView p3 = findViewById(R.id.Player3Nameview);
+        final TextView p4 = findViewById(R.id.Player4Nameview);
+
+        if(game == null){
+             GetGameFromDB().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()){
+                        game = task.getResult().toObject(Game.class);
+                        p1.setText(game.players.get(0).name);
+                        p2.setText(game.players.get(1).name);
+                        p3.setText(game.players.get(2).name);
+                        p4.setText(game.players.get(3).name);
+                        initRecyclerView();
+                    }
+                    else{
+                        Toast.makeText(OverViewActivity.this, "Load unsuccesfull", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -30,20 +58,20 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         return true;
     }
 
-    public void OnReturnButtonClick(View v){
-        Intent toHome = new Intent(OverViewActivity.this, HomeActivity.class);
-        startActivity(toHome);
-    }
-
-    public void OnNewRoundButtonClick(View v){
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return true;
     }
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         initImages();
         RecyclerView recyclerView = findViewById(R.id.mainRecycler);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         MainRecyclerViewAdaptor adapter = new MainRecyclerViewAdaptor(game.getRounds(), images, this );
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
     }
 

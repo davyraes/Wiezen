@@ -12,6 +12,10 @@ public class dans extends PlayAble {
         this.amount = amount;
     }
 
+    public dans(GameConfiguration configuration) {
+        super(configuration);
+    }
+
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) {
         Map<String, Integer> result = beginScores;

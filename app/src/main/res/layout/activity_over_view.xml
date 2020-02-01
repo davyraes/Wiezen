@@ -6,36 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".OverViewActivity">
 
-    <Button
-        android:id="@+id/newRoundButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="OnNewRoundButtonClick"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/returnbutton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/returnbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="OnReturnButtonClick"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <TextView
         android:id="@+id/Player3Nameview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:text="player 3"
-        app:layout_constraintStart_toEndOf="@+id/Player2Nameview"
+        app:layout_constraintStart_toStartOf="@+id/Player2Nameview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -53,30 +32,33 @@
         android:id="@+id/Player2Nameview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:text="player 2"
         app:layout_constraintStart_toEndOf="@+id/Player1Nameview"
+        app:layout_constraintStart_toStartOf="@+id/Player1Nameview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Player4Nameview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:text=" player 4"
-        app:layout_constraintStart_toEndOf="@+id/Player3Nameview"
+        app:layout_constraintStart_toStartOf="@+id/Player3Nameview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecycler"
-        android:layout_width="409dp"
-        android:layout_height="652dp"
-        app:layout_constraintBottom_toTopOf="@+id/newRoundButton"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player2Nameview" />
+        app:layout_constraintTop_toBottomOf="@+id/Player2Nameview"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

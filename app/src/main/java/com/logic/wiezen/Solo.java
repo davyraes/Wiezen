@@ -7,11 +7,14 @@ import java.util.Map;
 
 public class Solo extends PlayAble {
     private boolean slim;
+    private boolean isWon;
     public Solo(GameConfiguration configuration, boolean slim) {
         super(configuration);
         this.slim = slim;
     }
-    private boolean isWon;
+
+    public Solo(){
+    }
 
     @Override
     public Map<String, Integer> Process(Map<String, Integer> beginScores, ArrayList<Player> players, ArrayList<Player> contestors, int winningHands) throws Exception {

@@ -9,6 +9,9 @@ public abstract class PlayAble implements IPlayAble {
         this.configuration = configuration;
     }
 
+    public PlayAble() {
+    }
+
     protected void OneVsThree(Map<String, Integer> scores, ArrayList<Player> players, ArrayList<Player> contestors, boolean winCondition, int pPP, boolean doubled){
         if(doubled && configuration.doubleAllWon){
             pPP = pPP*2;

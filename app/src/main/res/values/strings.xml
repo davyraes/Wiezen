@@ -14,4 +14,14 @@
     <string name="Player3Text">Player 3</string>
     <string name="Player4Text">Player 4</string>
     <string name="Submit">Submit</string>
+    <string name="MenuNewRound">New Round</string>
+    <string name="MenuRegular">regular</string>
+    <string name="MenuDans">Dans</string>
+    <string name="MenuMisery">Misery</string>
+    <string name="Open">Open</string>
+    <string name="MenuTroul">Troul</string>
+    <string name="MenuSolo">Solo</string>
+    <string name="MenuSlim">Slim</string>
+    <string name="Menu1Player">1 Player</string>
+    <string name="Menu2Player">2 Players</string>
 </resources>
