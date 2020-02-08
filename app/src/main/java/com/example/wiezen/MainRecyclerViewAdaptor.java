@@ -3,10 +3,9 @@ package com.example.wiezen;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +47,7 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(0))
+                .load(mImages.get(imageNr(mRounds.get(position).IsWon)))
                 .into(holder.image);
 
         ArrayList<Player> players = round.players;
@@ -61,12 +60,11 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
         holder.scoreP3.setText(GetPlayerscoreAsString(round, players.get(2)));
         holder.scoreP4.setText(GetPlayerscoreAsString(round, players.get(3)));
 
-        holder.parentLayout.setOnHoverListener(new View.OnHoverListener(){
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onHover(View v, MotionEvent event) {
-                Log.d(TAG, "onHover: hovered over" + mRounds.get(position));
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: Clicked" + mRounds.get(position));
                 Toast.makeText(mContext, WonMessage(round.IsWon()), Toast.LENGTH_SHORT).show();
-                return false;
             }
         });
     }
@@ -104,7 +102,7 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
         TextView scoreP2;
         TextView scoreP3;
         TextView scoreP4;
-        RelativeLayout parentLayout;
+        LinearLayout parentLayout;
 
         public ViewHolder(View itemView){
             super(itemView);

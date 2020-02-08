@@ -1,71 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:padding="5dp"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
     android:id="@+id/list_item_layout">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/scoreP1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
-        android:text="TextView" />
+        tools:text="0" />
 
     <TextView
         android:id="@+id/scoreP2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/scoreP1"
-        android:layout_alignLeft="@+id/scoreP1"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
-        android:text="TextView" />
+        android:text="0" />
 
     <TextView
         android:id="@+id/scoreP3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/scoreP2"
-        android:layout_alignLeft="@+id/scoreP2"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
-        android:text="TextView" />
+        android:text="0" />
 
     <TextView
         android:id="@+id/scoreP4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/scoreP3"
-        android:layout_alignLeft="@+id/scoreP3"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
-        android:text="TextView" />
+        android:text="0" />
 
-</RelativeLayout>
+</LinearLayout>

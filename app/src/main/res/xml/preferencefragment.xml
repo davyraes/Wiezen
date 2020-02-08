@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        android:defaultValue="@string/Player1Text"
+        android:key="@string/P1Key"
+        android:title="@string/DefaultPlayerNamePref"/>
+    <CheckBoxPreference
+        android:defaultValue="false"
+        app:key="@string/EnableP1Key"
+        android:summaryOff="Disabled"
+        android:summaryOn="Enabled"
+        android:title="@string/EnableDefaultPlayerNamePref"/>
+</PreferenceScreen>

@@ -2,11 +2,9 @@ package com.example.wiezen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.PersistableBundle;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -8,6 +8,7 @@
     <string name="PassWordHint">Password</string>
     <string name="NewGameBtnText">New Game</string>
     <string name="ContinueGameBtnText">Continue Game</string>
+    <string name="SettingsBtnText">Settings</string>
     <string name="LogOutBtnText">Log out</string>
     <string name="Player1Text">Player 1</string>
     <string name="Player2Text">Player 2</string>
@@ -24,4 +25,26 @@
     <string name="MenuSlim">Slim</string>
     <string name="Menu1Player">1 Player</string>
     <string name="Menu2Player">2 Players</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="test">Test</string>
+    <string name="DefaultPlayerNamePref">Set the default name of Player 1</string>
+    <string name="EnableDefaultPlayerNamePref">Enable setting Player 1 name</string>
+
+    <string name="P1Key" translatable="false">P1Key</string>
+    <string name="EnableP1Key" translatable="false">EnableP1Key</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>
