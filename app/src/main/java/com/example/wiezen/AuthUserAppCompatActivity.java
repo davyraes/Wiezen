@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class AuthUserAppCompatActivity extends AppCompatActivity {
-    private static final String TAG = "AuthUserAppCompatActivi";
+    private static final String TAG = "AuthUserAppCompatActivity";
     protected FirebaseAuth mFirebaseAuth;
     protected FirebaseAuth.AuthStateListener mAuthStateListener;
     protected FirebaseUser user;
