@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Round implements Parcelable {
+    public int id;
     public Map<String, Integer> playerScores;
     public ArrayList<Player> players;
     public ArrayList<Player> contestors;
@@ -62,7 +63,16 @@ public class Round implements Parcelable {
     public Round() {
     }
 
-    public Round(Map<String, Integer> playerScores, ArrayList<Player> players, ArrayList<Player> contestors, Player dealer, PlayAbleEnum play, int hands, GameConfiguration config) throws Exception {
+    public Round(
+            int id,
+            Map<String, Integer> playerScores,
+            ArrayList<Player> players,
+            ArrayList<Player> contestors,
+            Player dealer,
+            PlayAbleEnum play,
+            int hands,
+            GameConfiguration config) throws Exception {
+        this.id = id;
         this.dealer = dealer;
         this.play = play;
         this.hands = hands;
@@ -76,8 +86,17 @@ public class Round implements Parcelable {
             case REGULAR:
                 playable = new Regular(config);
                 break;
-            case DANS:
-                playable = new dans(config);
+            case DANS_9:
+                playable = new dans(config,9);
+                break;
+            case DANS_10:
+                playable = new dans(config, 10);
+                break;
+            case DANS_11:
+                playable = new dans(config, 11);
+                break;
+            case DANS_12:
+                playable = new dans(config, 12);
                 break;
             case SOLO:
                 playable = new Solo(config, false);

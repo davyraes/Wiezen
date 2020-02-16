@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.logic.wiezen.Player;
@@ -26,7 +25,7 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
     private ArrayList<String> mImages;
     private Context mContext;
 
-    public MainRecyclerViewAdaptor(ArrayList<Round> mRounds, ArrayList<String> mImages, Context mContext) {
+    public MainRecyclerViewAdaptor(Context mContext, ArrayList<Round> mRounds, ArrayList<String> mImages) {
         this.mRounds = mRounds;
         this.mImages = mImages;
         this.mContext = mContext;
@@ -43,13 +42,13 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-        final Round round = mRounds.get(position);
 
         Glide.with(mContext)
                 .asBitmap()
                 .load(mImages.get(imageNr(mRounds.get(position).IsWon)))
                 .into(holder.image);
 
+        Round round = mRounds.get(position);
         ArrayList<Player> players = round.players;
         if (round.contestors != null){
             players.addAll(round.contestors);
@@ -59,27 +58,11 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
         holder.scoreP2.setText(GetPlayerscoreAsString(round, players.get(1)));
         holder.scoreP3.setText(GetPlayerscoreAsString(round, players.get(2)));
         holder.scoreP4.setText(GetPlayerscoreAsString(round, players.get(3)));
-
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: Clicked" + mRounds.get(position));
-                Toast.makeText(mContext, WonMessage(round.IsWon()), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return mRounds.size();
-    }
-
-    private String WonMessage(boolean isWon){
-        if (isWon){
-            return "Won";
-        }else{
-            return "Lost";
-        }
     }
 
     private Integer imageNr(boolean isWon){
@@ -113,6 +96,5 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
             scoreP4 = itemView.findViewById(R.id.scoreP4);
             parentLayout = itemView.findViewById(R.id.list_item_layout);
         }
-
     }
 }

@@ -120,7 +120,7 @@ public class PlayersActivity extends AuthUserAppCompatActivity {
         /// Create a new starting round
         ArrayList<Round> startingRound = new ArrayList<>();
         try {
-            startingRound.add(new Round(start, players, null, null, PlayAbleEnum.START, 0, config));
+            startingRound.add(new Round(1, start, players, null, null, PlayAbleEnum.START, 0, config));
         } catch (Exception e) {
             Log.e(TAG, "CreateGame: Can t create game", e);
         }
