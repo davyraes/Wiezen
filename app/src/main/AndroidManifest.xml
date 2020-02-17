@@ -20,7 +20,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.wiezen.HomeActivity" />
         </activity>
-        <activity android:name=".oneplayerActivity" />
         <activity android:name=".OverViewActivity" />
         <activity android:name=".PlayersActivity" />
         <activity android:name=".GameActivity" />

@@ -18,17 +18,17 @@ public abstract class PlayAble implements IPlayAble {
         }
         if(winCondition){
             for (Player winner : players) {
-                scores.put(winner.name, scores.get(winner) + pPP);
+                scores.put(winner.name, scores.get(winner.name) + pPP);
             }
             for (Player loser : contestors) {
-                scores.put(loser.name, scores.get(loser) - (pPP/3));
+                scores.put(loser.name, scores.get(loser.name) - (pPP/3));
             }
         }else {
             for (Player winner : contestors) {
-                scores.put(winner.name, scores.get(winner) + (pPP/3));
+                scores.put(winner.name, scores.get(winner.name) + (pPP/3));
             }
             for (Player loser : players) {
-                scores.put(loser.name, scores.get(loser) - pPP);
+                scores.put(loser.name, scores.get(loser.name) - pPP);
             }
         }
     }
@@ -39,17 +39,17 @@ public abstract class PlayAble implements IPlayAble {
         }
         if(winCondition){
             for (Player winner : players) {
-                scores.put(winner.name, scores.get(winner) + pPP);
+                scores.put(winner.name, scores.get(winner.name) + pPP);
             }
             for (Player loser : contestors) {
-                scores.put(loser.name, scores.get(loser) - pPP);
+                scores.put(loser.name, scores.get(loser.name) - pPP);
             }
         }else {
             for (Player winner : contestors) {
-                scores.put(winner.name, scores.get(winner) + pPP);
+                scores.put(winner.name, scores.get(winner.name) + pPP);
             }
             for (Player loser : players) {
-                scores.put(loser.name, scores.get(loser) - pPP);
+                scores.put(loser.name, scores.get(loser.name) - pPP);
             }
         }
     }

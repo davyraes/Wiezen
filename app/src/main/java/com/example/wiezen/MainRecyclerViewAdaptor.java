@@ -58,6 +58,13 @@ public class MainRecyclerViewAdaptor extends RecyclerView.Adapter<MainRecyclerVi
         holder.scoreP2.setText(GetPlayerscoreAsString(round, players.get(1)));
         holder.scoreP3.setText(GetPlayerscoreAsString(round, players.get(2)));
         holder.scoreP4.setText(GetPlayerscoreAsString(round, players.get(3)));
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // todo : go to detail fragment
+            }
+        });
     }
 
     @Override

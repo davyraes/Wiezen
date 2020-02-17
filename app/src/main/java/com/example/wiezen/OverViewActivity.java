@@ -26,18 +26,19 @@ import com.logic.wiezen.Round;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 public class OverViewActivity extends AuthUserAppCompatActivity {
     private static final String TAG = "OverViewActivity";
-    private ArrayList<String> images = new ArrayList<>();
-    ArrayList<String> listItems = new ArrayList<>();
+    private ArrayList<String> listItems = new ArrayList<>();
     boolean[] checkedItems;
-    ArrayList<Integer> mUserItems = new ArrayList<>();
-    ArrayList<Player> players = new ArrayList<>();
-    ArrayList<Player> contestors = new ArrayList<>();
+    private ArrayList<Integer> mUserItems = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> contestors = new ArrayList<>();
     int hands;
+
+    private SectionStatePagerAdaptor mSectionStatePagerAdaptor;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,8 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         setContentView(R.layout.activity_over_view);
         Log.d(TAG, "onCreate: started overview.");
 
-        final TextView p1 = findViewById(R.id.Player1Nameview);
-        final TextView p2 = findViewById(R.id.Player2Nameview);
-        final TextView p3 = findViewById(R.id.Player3Nameview);
-        final TextView p4 = findViewById(R.id.Player4Nameview);
+        mSectionStatePagerAdaptor = new SectionStatePagerAdaptor(getSupportFragmentManager());
+        mViewPager = findViewById(R.id.container);
 
         if(game == null){
              GetGameFromDB()
@@ -58,18 +57,6 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
                     if(task.isSuccessful()){
                         Log.d(TAG, "onComplete: game loaded");
                         game = task.getResult().toObject(Game.class);
-                        p1.setText(game.players.get(0).name);
-                        p2.setText(game.players.get(1).name);
-                        p3.setText(game.players.get(2).name);
-                        p4.setText(game.players.get(3).name);
-                        initRecyclerView();
-
-                        for (Player player :
-                                game.getPlayers()) {
-                            listItems.add(player.name);
-                        }
-
-                        checkedItems = new boolean[listItems.size()];
                     }
                     else{
                         Toast.makeText(OverViewActivity.this, "Load unsuccesfull", Toast.LENGTH_SHORT).show();
@@ -78,6 +65,8 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
                 }
             });
         }
+
+        setupViewPager(mViewPager);
     }
 
     @Override
@@ -142,25 +131,24 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
-        initImages();
-        RecyclerView recyclerView = findViewById(R.id.mainRecycler);
-        MainRecyclerViewAdaptor adapter = new MainRecyclerViewAdaptor(this, game.getRounds(), images );
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private void initImages(){
-        Log.d(TAG, "initImages: preparing bitmaps");
-
-        images.add("https://www.munters.com/contentassets/070ec072e2ac418cb48a897a1fafc9b1/win.jpg");
-        images.add("https://comps.canstockphoto.com/loser-stamp-drawing_csp15595090.jpg");
+    public void setViewPager(int fragmentNumber){
+        mViewPager.setCurrentItem(fragmentNumber);
     }
 
     private void setPlayers(final int amountOfPlayers, final PlayAbleEnum play){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         mBuilder.setTitle(getString(R.string.AlertTitle));
+
+        listItems.clear();
+        players.clear();
+        contestors.clear();
+
+        for (Player player :
+                game.getPlayers()) {
+            listItems.add(player.name);
+        }
+
+        checkedItems = new boolean[listItems.size()];
         mBuilder.setMultiChoiceItems(listItems.toArray(new String[listItems.size()]), checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -228,15 +216,15 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
     }
 
     private void setHands(final PlayAbleEnum play){
-        View view = LayoutInflater.from(this).inflate(R.layout.user_input_layout, null);
+        final View view = LayoutInflater.from(this).inflate(R.layout.user_input_layout, null);
 
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setView(view);
 
-        final EditText userInput = findViewById(R.id.userinput);
         alertBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                EditText userInput = view.findViewById(R.id.userinput);
                 String temp= userInput.getText().toString();
                 if (!temp.isEmpty()){
                     hands = Integer.parseInt(temp);
@@ -262,7 +250,7 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
                             game.rounds.get(game.rounds.size()-1).playerScores,
                             players,
                             contestors,
-                            null,
+                            players.get(0),
                             play,
                             hands,
                             game.configuration);
@@ -272,7 +260,13 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         }
 
         SaveGameToDb(game);
-        Intent intent = new Intent(OverViewActivity.this, OverViewActivity.class);
-        startActivity(intent);
+        setViewPager(0);
+    }
+
+    private void setupViewPager(ViewPager viewPager){
+        SectionStatePagerAdaptor adaptor = new SectionStatePagerAdaptor(getSupportFragmentManager());
+        adaptor.addFragment(new RecyclerViewFragment(), "Recycler");
+        adaptor.addFragment(new DetailFragment(), "Detail");
+        viewPager.setAdapter(adaptor);
     }
 }
