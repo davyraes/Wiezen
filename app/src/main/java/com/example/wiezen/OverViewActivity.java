@@ -12,12 +12,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.logic.wiezen.Game;
 import com.logic.wiezen.PlayAbleEnum;
 import com.logic.wiezen.Player;
@@ -26,19 +29,22 @@ import com.logic.wiezen.Round;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentActivity;
 
-public class OverViewActivity extends AuthUserAppCompatActivity {
+public class OverViewActivity extends FragmentActivity {
     private static final String TAG = "OverViewActivity";
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser user;
+    private FirebaseFirestore db;
+    public DocumentReference gameReference;
+
     private ArrayList<String> listItems = new ArrayList<>();
     boolean[] checkedItems;
     private ArrayList<Integer> mUserItems = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Player> contestors = new ArrayList<>();
     int hands;
-
-    private SectionStatePagerAdaptor mSectionStatePagerAdaptor;
-    private ViewPager mViewPager;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +52,14 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         setContentView(R.layout.activity_over_view);
         Log.d(TAG, "onCreate: started overview.");
 
-        mSectionStatePagerAdaptor = new SectionStatePagerAdaptor(getSupportFragmentManager());
-        mViewPager = findViewById(R.id.container);
+        db = FirebaseFirestore.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        user = mFirebaseAuth.getCurrentUser();
+        gameReference = db.collection("Games").document(user.getUid());
 
         if(game == null){
-             GetGameFromDB()
+             gameReference
+                     .get()
                      .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -60,18 +69,11 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
                     }
                     else{
                         Toast.makeText(OverViewActivity.this, "Load unsuccesfull", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "onComplete: can load ", task.getException());
+                        Log.e(TAG, "onComplete: cant load ", task.getException());
                     }
                 }
             });
         }
-
-        setupViewPager(mViewPager);
-    }
-
-    @Override
-    protected Boolean NeedsAuth() {
-        return true;
     }
 
     @Override
@@ -131,8 +133,10 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setViewPager(int fragmentNumber){
-        mViewPager.setCurrentItem(fragmentNumber);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameReference.set(game);
     }
 
     private void setPlayers(final int amountOfPlayers, final PlayAbleEnum play){
@@ -259,14 +263,6 @@ public class OverViewActivity extends AuthUserAppCompatActivity {
             Log.e(TAG, "newRound:" + play.toString(), e);
         }
 
-        SaveGameToDb(game);
-        setViewPager(0);
-    }
-
-    private void setupViewPager(ViewPager viewPager){
-        SectionStatePagerAdaptor adaptor = new SectionStatePagerAdaptor(getSupportFragmentManager());
-        adaptor.addFragment(new RecyclerViewFragment(), "Recycler");
-        adaptor.addFragment(new DetailFragment(), "Detail");
-        viewPager.setAdapter(adaptor);
+        gameReference.set(game);
     }
 }

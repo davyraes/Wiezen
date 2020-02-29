@@ -49,4 +49,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="AlertTitle">Select players that play</string>
     <string name="number_of_hands">number of hands</string>
+    <string name="landscape">Landscape</string>
+    <string name="ronde">ronde</string>
+    <string name="isWon">won?</string>
 </resources>
