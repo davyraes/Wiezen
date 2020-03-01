@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,13 +72,14 @@ public class RecyclerViewFragment extends Fragment implements OnRoundClickListen
         MainRecyclerViewAdaptor adapter = new MainRecyclerViewAdaptor(getActivity(), game.getRounds(), mImages, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.scrollToPosition(game.rounds.size()-1);
     }
 
     private void initImages() {
         Log.d(TAG, "initImages: preparing bitmaps");
 
-        mImages.add("https://comps.canstockphoto.com/loser-stamp-drawing_csp15595090.jpg");
         mImages.add("https://www.munters.com/contentassets/070ec072e2ac418cb48a897a1fafc9b1/win.jpg");
+        mImages.add("https://comps.canstockphoto.com/loser-stamp-drawing_csp15595090.jpg");
     }
 
     @Override

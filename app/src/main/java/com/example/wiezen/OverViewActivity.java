@@ -27,11 +27,14 @@ import com.logic.wiezen.Player;
 import com.logic.wiezen.Round;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-public class OverViewActivity extends FragmentActivity {
+public class OverViewActivity extends AppCompatActivity {
     private static final String TAG = "OverViewActivity";
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser user;
@@ -250,19 +253,21 @@ public class OverViewActivity extends FragmentActivity {
         try {
             Round newRound =
                     new Round(
-                            game.rounds.size()+1,
-                            game.rounds.get(game.rounds.size()-1).playerScores,
+                            game.rounds.size() + 1,
+                            game.rounds.get(game.rounds.size() - 1).playerScores,
                             players,
                             contestors,
                             players.get(0),
                             play,
                             hands,
                             game.configuration);
-            game.rounds.add(newRound);
+            game.AddRound(newRound);
         } catch (Exception e) {
             Log.e(TAG, "newRound:" + play.toString(), e);
         }
 
         gameReference.set(game);
+        finish();
+        startActivity(getIntent());
     }
 }

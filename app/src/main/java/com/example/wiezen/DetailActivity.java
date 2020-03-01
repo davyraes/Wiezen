@@ -18,6 +18,8 @@ public class DetailActivity extends FragmentActivity {
         int round = intent.getIntExtra("Round", 0);
 
         ((TextView) findViewById(R.id.wonDetail)).setText(isWon);
-        ((TextView) findViewById(R.id.RoundDetail)).setText(round);
+        if (round != 0){
+        ((TextView) findViewById(R.id.RoundDetail)).setText(Integer.toString(round));
+        }
     }
 }

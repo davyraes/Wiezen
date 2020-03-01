@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Round implements Parcelable {
@@ -118,8 +119,11 @@ public class Round implements Parcelable {
                 break;
         }
 
-        this.playerScores = playable.Process(playerScores, players, contestors, hands);
-        playable.IsWon();
+        HashMap<String, Integer>new_map = new HashMap<>();
+        new_map.putAll(playerScores);
+
+        this.playerScores = playable.Process(new_map, players, contestors, hands);
+        this.IsWon = playable.IsWon();
     }
     public boolean IsWon(){
         return IsWon();

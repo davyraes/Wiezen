@@ -18,16 +18,16 @@ public class DetailFragment extends Fragment {
         Bundle bundle = getArguments();
         TextView wonText = view.findViewById(R.id.wonDetail);
         TextView roundText = view.findViewById(R.id.RoundDetail);
-        int round = 1;
-        String won = "Lost";
+        int round;
+        String won;
 
         if(bundle != null){
             won = getArguments().getString("isWon");
             round = getArguments().getInt("Round");
-        }
 
-        wonText.setText(won);
-        roundText.setText(Integer.toString(round));
+            wonText.setText(won);
+            roundText.setText(Integer.toString(round));
+        }
 
         return view;
     }
